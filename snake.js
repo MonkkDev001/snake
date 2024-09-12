@@ -1,6 +1,6 @@
 window.onload = function () {
-    var canvasWidth = 1500;
-    var canvasHeight = 700;
+    var canvasWidth = 1200;
+    var canvasHeight = 600;
     var blockSize = 50;
     var ctx;
     var delay = 100;
@@ -239,29 +239,28 @@ window.onload = function () {
             return head[0] === appleToEat.position[0] && head[1] === appleToEat.position[1];
         };
     }
-
+    var appleImg = new Image();
+    appleImg.src = 'apple.png'; 
     function Apple(position) {
         this.position = position;
+    
         this.draw = function () {
             ctx.save();
-            ctx.fillStyle = "#1cc68d";
-            ctx.beginPath();
-            var radius = blockSize / 2;
-            var x = this.position[0] * blockSize + radius;
-            var y = this.position[1] * blockSize + radius;
-            ctx.arc(x, y, radius, 0, Math.PI * 2, true);
-            ctx.fill();
+            var x = this.position[0] * blockSize;
+            var y = this.position[1] * blockSize;
+            ctx.drawImage(appleImg, x, y, blockSize, blockSize); // Dessine l'image de la pomme
             ctx.restore();
         };
-
+    
         this.setNewPosition = function () {
             var newX = Math.round(Math.random() * (widthInBlocks - 1));
             var newY = Math.round(Math.random() * (heightInBlocks - 1));
             this.position = [newX, newY];
         };
+    
         this.isOnSnake = function (snakeToCheck) {
             var isOnSnake = false;
-
+    
             for (var i = 0; i < snakeToCheck.body.length; i++) {
                 if (this.position[0] === snakeToCheck.body[i][0] && this.position[1] === snakeToCheck.body[i][1]) {
                     isOnSnake = true;
