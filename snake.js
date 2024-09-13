@@ -58,7 +58,7 @@ window.onload = function () {
     }
     
     var lastTime = 0;
-    var delay = 80; 
+    var delay = 100; 
 
     function refreshCanvas(time) {
         if (time - lastTime >= delay) { // Se déplace seulement si le délai est atteint
